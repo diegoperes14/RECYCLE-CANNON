@@ -5,26 +5,32 @@ using UnityEngine.UI;
 
 public class Canhao : MonoBehaviour
 {
-    public int municao; //armazenará as minições disponíveis. Começará com 10
-    public Joystick joystick; //o Joystic que controlará esse canhão
-    public Transform projetil; //o projetil que será atirado
-    public AudioSource audioSource;//o audiosource desse canhão
-    public AudioClip tiro, lixo; //os sons de tiro e de lixo caindo na lixeira
-    public int velocidade; //a velocidade com que esse canhão irá se mover na tela
-    public Text municaoText;//O campo de texto que mostrará a munição na tela
+    /*
+     * Esta classe irá controlar o canhão que fica na tela, conterá classes para recarregar
+     * a munição e receberá o input do direcional da direita
+    */
+    public int municao;             //armazenará as minições disponíveis. Começará com 10
+    public Joystick joystick;       //o Joystic que controlará esse canhão
+    public Transform projetil;      //o projetil que será atirado
+    public AudioSource audioSource; //o audiosource desse canhão
+    public AudioClip tiro, lixo;    //os sons de tiro e de lixo caindo na lixeira
+    public int velocidade;          //a velocidade com que esse canhão irá se mover na tela
+    public Text municaoText;        //O campo de texto que mostrará a munição na tela
 
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = this.GetComponent<AudioSource>();
+        audioSource = this.GetComponent<AudioSource>(); //Pega o componente AudioSource para tocar as músicas de tiro e de recarga
     }
 
     // Update is called once per frame
     void Update()
     {
+        //faz o controle horizontal para a esquerda
         if (transform.position.x > -3.6f && joystick.Horizontal < 0) {
             transform.Translate(joystick.Horizontal * Time.deltaTime * velocidade, 0, 0);
         }
+        //faz o controle horizontal para a direita
         if (transform.position.x < 3.5f && joystick.Horizontal > 0) {
             transform.Translate(joystick.Horizontal * Time.deltaTime * velocidade, 0, 0);
         }
